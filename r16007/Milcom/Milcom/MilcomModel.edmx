@@ -1,0 +1,656 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MilcomModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="MilcomModelStoreContainer">
+          <EntitySet Name="certifikat" EntityType="MilcomModel.Store.certifikat" store:Type="Tables" Schema="piDea" />
+          <EntitySet Name="korisnik" EntityType="MilcomModel.Store.korisnik" store:Type="Tables" Schema="piDea" />
+          <EntitySet Name="odgovor" EntityType="MilcomModel.Store.odgovor" store:Type="Tables" Schema="piDea" />
+          <EntitySet Name="pitanje" EntityType="MilcomModel.Store.pitanje" store:Type="Tables" Schema="piDea" />
+          <EntitySet Name="polaznik" EntityType="MilcomModel.Store.polaznik" store:Type="Tables" Schema="piDea" />
+          <EntitySet Name="rezultat" EntityType="MilcomModel.Store.rezultat" store:Type="Tables" Schema="piDea" />
+          <EntitySet Name="test" EntityType="MilcomModel.Store.test" store:Type="Tables" Schema="piDea" />
+          <EntitySet Name="tip_korisnik" EntityType="MilcomModel.Store.tip_korisnik" store:Type="Tables" Schema="piDea" />
+          <EntitySet Name="tip_polaganja" EntityType="MilcomModel.Store.tip_polaganja" store:Type="Tables" Schema="piDea" />
+          <AssociationSet Name="fk_certifikat_rezultat1" Association="MilcomModel.Store.fk_certifikat_rezultat1">
+            <End Role="rezultat" EntitySet="rezultat" />
+            <End Role="certifikat" EntitySet="certifikat" />
+          </AssociationSet>
+          <AssociationSet Name="fk_korisnik_polaznik1" Association="MilcomModel.Store.fk_korisnik_polaznik1">
+            <End Role="polaznik" EntitySet="polaznik" />
+            <End Role="korisnik" EntitySet="korisnik" />
+          </AssociationSet>
+          <AssociationSet Name="fk_korisnik_tip_korisnik1" Association="MilcomModel.Store.fk_korisnik_tip_korisnik1">
+            <End Role="tip_korisnik" EntitySet="tip_korisnik" />
+            <End Role="korisnik" EntitySet="korisnik" />
+          </AssociationSet>
+          <AssociationSet Name="fk_odgovor_pitanje1" Association="MilcomModel.Store.fk_odgovor_pitanje1">
+            <End Role="pitanje" EntitySet="pitanje" />
+            <End Role="odgovor" EntitySet="odgovor" />
+          </AssociationSet>
+          <AssociationSet Name="fk_pitanje_tip_polaganja1" Association="MilcomModel.Store.fk_pitanje_tip_polaganja1">
+            <End Role="tip_polaganja" EntitySet="tip_polaganja" />
+            <End Role="pitanje" EntitySet="pitanje" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rezultat_has_pitanje_odgovor1" Association="MilcomModel.Store.fk_rezultat_has_pitanje_odgovor1">
+            <End Role="odgovor" EntitySet="odgovor" />
+            <End Role="test" EntitySet="test" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rezultat_has_pitanje_pitanje1" Association="MilcomModel.Store.fk_rezultat_has_pitanje_pitanje1">
+            <End Role="pitanje" EntitySet="pitanje" />
+            <End Role="test" EntitySet="test" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rezultat_has_pitanje_rezultat" Association="MilcomModel.Store.fk_rezultat_has_pitanje_rezultat">
+            <End Role="rezultat" EntitySet="rezultat" />
+            <End Role="test" EntitySet="test" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rezultat_polaznik1" Association="MilcomModel.Store.fk_rezultat_polaznik1">
+            <End Role="polaznik" EntitySet="polaznik" />
+            <End Role="rezultat" EntitySet="rezultat" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rezultat_tip_polaganja1" Association="MilcomModel.Store.fk_rezultat_tip_polaganja1">
+            <End Role="tip_polaganja" EntitySet="tip_polaganja" />
+            <End Role="rezultat" EntitySet="rezultat" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="certifikat">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="datum_izdavanja" Type="varchar" MaxLength="45" />
+          <Property Name="rezultat_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="korisnik">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="password" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="tip_korisnik_id" Type="int" Nullable="false" />
+          <Property Name="polaznik_oib" Type="int" />
+        </EntityType>
+        <EntityType Name="odgovor">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="tekst" Type="varchar" MaxLength="45" />
+          <Property Name="tocno" Type="bool" />
+          <Property Name="pitanje_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pitanje">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="tekst" Type="varchar" MaxLength="45" />
+          <Property Name="tip_polaganja_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="polaznik">
+          <Key>
+            <PropertyRef Name="oib" />
+          </Key>
+          <Property Name="oib" Type="int" Nullable="false" />
+          <Property Name="ime" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="prezime" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="datum_rodjenja" Type="date" Nullable="false" />
+          <Property Name="adresa" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="telefon" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="email" Type="varchar" Nullable="false" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="rezultat">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="datum_polaganja" Type="date" />
+          <Property Name="pokusaj" Type="int" />
+          <Property Name="bodovi" Type="int" />
+          <Property Name="tip_polaganja_id" Type="int" Nullable="false" />
+          <Property Name="polaznik_oib" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="test">
+          <Key>
+            <PropertyRef Name="rezultat_id" />
+            <PropertyRef Name="pitanje_id" />
+            <PropertyRef Name="odgovor_id" />
+          </Key>
+          <Property Name="rezultat_id" Type="int" Nullable="false" />
+          <Property Name="pitanje_id" Type="int" Nullable="false" />
+          <Property Name="odgovor_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tip_korisnik">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="tip" Type="varchar" Nullable="false" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="tip_polaganja">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="tip" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <Association Name="fk_certifikat_rezultat1">
+          <End Role="rezultat" Type="MilcomModel.Store.rezultat" Multiplicity="1" />
+          <End Role="certifikat" Type="MilcomModel.Store.certifikat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rezultat">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="certifikat">
+              <PropertyRef Name="rezultat_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_korisnik_polaznik1">
+          <End Role="polaznik" Type="MilcomModel.Store.polaznik" Multiplicity="0..1" />
+          <End Role="korisnik" Type="MilcomModel.Store.korisnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="polaznik">
+              <PropertyRef Name="oib" />
+            </Principal>
+            <Dependent Role="korisnik">
+              <PropertyRef Name="polaznik_oib" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_korisnik_tip_korisnik1">
+          <End Role="tip_korisnik" Type="MilcomModel.Store.tip_korisnik" Multiplicity="1" />
+          <End Role="korisnik" Type="MilcomModel.Store.korisnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tip_korisnik">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="korisnik">
+              <PropertyRef Name="tip_korisnik_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_odgovor_pitanje1">
+          <End Role="pitanje" Type="MilcomModel.Store.pitanje" Multiplicity="1" />
+          <End Role="odgovor" Type="MilcomModel.Store.odgovor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pitanje">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="odgovor">
+              <PropertyRef Name="pitanje_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_pitanje_tip_polaganja1">
+          <End Role="tip_polaganja" Type="MilcomModel.Store.tip_polaganja" Multiplicity="1" />
+          <End Role="pitanje" Type="MilcomModel.Store.pitanje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tip_polaganja">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pitanje">
+              <PropertyRef Name="tip_polaganja_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rezultat_has_pitanje_odgovor1">
+          <End Role="odgovor" Type="MilcomModel.Store.odgovor" Multiplicity="1" />
+          <End Role="test" Type="MilcomModel.Store.test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="odgovor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="test">
+              <PropertyRef Name="odgovor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rezultat_has_pitanje_pitanje1">
+          <End Role="pitanje" Type="MilcomModel.Store.pitanje" Multiplicity="1" />
+          <End Role="test" Type="MilcomModel.Store.test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pitanje">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="test">
+              <PropertyRef Name="pitanje_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rezultat_has_pitanje_rezultat">
+          <End Role="rezultat" Type="MilcomModel.Store.rezultat" Multiplicity="1" />
+          <End Role="test" Type="MilcomModel.Store.test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rezultat">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="test">
+              <PropertyRef Name="rezultat_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rezultat_polaznik1">
+          <End Role="polaznik" Type="MilcomModel.Store.polaznik" Multiplicity="1" />
+          <End Role="rezultat" Type="MilcomModel.Store.rezultat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="polaznik">
+              <PropertyRef Name="oib" />
+            </Principal>
+            <Dependent Role="rezultat">
+              <PropertyRef Name="polaznik_oib" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rezultat_tip_polaganja1">
+          <End Role="tip_polaganja" Type="MilcomModel.Store.tip_polaganja" Multiplicity="1" />
+          <End Role="rezultat" Type="MilcomModel.Store.rezultat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tip_polaganja">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rezultat">
+              <PropertyRef Name="tip_polaganja_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MilcomModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MilcomEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="certifikat" EntityType="MilcomModel.certifikat" />
+          <EntitySet Name="korisnik" EntityType="MilcomModel.korisnik" />
+          <EntitySet Name="odgovor" EntityType="MilcomModel.odgovor" />
+          <EntitySet Name="pitanje" EntityType="MilcomModel.pitanje" />
+          <EntitySet Name="polaznik" EntityType="MilcomModel.polaznik" />
+          <EntitySet Name="rezultat" EntityType="MilcomModel.rezultat" />
+          <EntitySet Name="test" EntityType="MilcomModel.test" />
+          <EntitySet Name="tip_korisnik" EntityType="MilcomModel.tip_korisnik" />
+          <EntitySet Name="tip_polaganja" EntityType="MilcomModel.tip_polaganja" />
+          <AssociationSet Name="fk_certifikat_rezultat1" Association="MilcomModel.fk_certifikat_rezultat1">
+            <End Role="rezultat" EntitySet="rezultat" />
+            <End Role="certifikat" EntitySet="certifikat" />
+          </AssociationSet>
+          <AssociationSet Name="fk_korisnik_polaznik1" Association="MilcomModel.fk_korisnik_polaznik1">
+            <End Role="polaznik" EntitySet="polaznik" />
+            <End Role="korisnik" EntitySet="korisnik" />
+          </AssociationSet>
+          <AssociationSet Name="fk_korisnik_tip_korisnik1" Association="MilcomModel.fk_korisnik_tip_korisnik1">
+            <End Role="tip_korisnik" EntitySet="tip_korisnik" />
+            <End Role="korisnik" EntitySet="korisnik" />
+          </AssociationSet>
+          <AssociationSet Name="fk_odgovor_pitanje1" Association="MilcomModel.fk_odgovor_pitanje1">
+            <End Role="pitanje" EntitySet="pitanje" />
+            <End Role="odgovor" EntitySet="odgovor" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rezultat_has_pitanje_odgovor1" Association="MilcomModel.fk_rezultat_has_pitanje_odgovor1">
+            <End Role="odgovor" EntitySet="odgovor" />
+            <End Role="test" EntitySet="test" />
+          </AssociationSet>
+          <AssociationSet Name="fk_pitanje_tip_polaganja1" Association="MilcomModel.fk_pitanje_tip_polaganja1">
+            <End Role="tip_polaganja" EntitySet="tip_polaganja" />
+            <End Role="pitanje" EntitySet="pitanje" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rezultat_has_pitanje_pitanje1" Association="MilcomModel.fk_rezultat_has_pitanje_pitanje1">
+            <End Role="pitanje" EntitySet="pitanje" />
+            <End Role="test" EntitySet="test" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rezultat_polaznik1" Association="MilcomModel.fk_rezultat_polaznik1">
+            <End Role="polaznik" EntitySet="polaznik" />
+            <End Role="rezultat" EntitySet="rezultat" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rezultat_has_pitanje_rezultat" Association="MilcomModel.fk_rezultat_has_pitanje_rezultat">
+            <End Role="rezultat" EntitySet="rezultat" />
+            <End Role="test" EntitySet="test" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rezultat_tip_polaganja1" Association="MilcomModel.fk_rezultat_tip_polaganja1">
+            <End Role="tip_polaganja" EntitySet="tip_polaganja" />
+            <End Role="rezultat" EntitySet="rezultat" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="certifikat">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="datum_izdavanja" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="rezultat_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="rezultat" Relationship="MilcomModel.fk_certifikat_rezultat1" FromRole="certifikat" ToRole="rezultat" />
+        </EntityType>
+        <EntityType Name="korisnik">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="tip_korisnik_id" Type="Int32" Nullable="false" />
+          <Property Name="polaznik_oib" Type="Int32" />
+          <NavigationProperty Name="polaznik" Relationship="MilcomModel.fk_korisnik_polaznik1" FromRole="korisnik" ToRole="polaznik" />
+          <NavigationProperty Name="tip_korisnik" Relationship="MilcomModel.fk_korisnik_tip_korisnik1" FromRole="korisnik" ToRole="tip_korisnik" />
+        </EntityType>
+        <EntityType Name="odgovor">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="tekst" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="tocno" Type="Boolean" />
+          <Property Name="pitanje_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="pitanje" Relationship="MilcomModel.fk_odgovor_pitanje1" FromRole="odgovor" ToRole="pitanje" />
+          <NavigationProperty Name="test" Relationship="MilcomModel.fk_rezultat_has_pitanje_odgovor1" FromRole="odgovor" ToRole="test" />
+        </EntityType>
+        <EntityType Name="pitanje">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="tekst" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="tip_polaganja_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="odgovor" Relationship="MilcomModel.fk_odgovor_pitanje1" FromRole="pitanje" ToRole="odgovor" />
+          <NavigationProperty Name="tip_polaganja" Relationship="MilcomModel.fk_pitanje_tip_polaganja1" FromRole="pitanje" ToRole="tip_polaganja" />
+          <NavigationProperty Name="test" Relationship="MilcomModel.fk_rezultat_has_pitanje_pitanje1" FromRole="pitanje" ToRole="test" />
+        </EntityType>
+        <EntityType Name="polaznik">
+          <Key>
+            <PropertyRef Name="oib" />
+          </Key>
+          <Property Name="oib" Type="Int32" Nullable="false" />
+          <Property Name="ime" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="prezime" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="datum_rodjenja" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="adresa" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="telefon" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="korisnik" Relationship="MilcomModel.fk_korisnik_polaznik1" FromRole="polaznik" ToRole="korisnik" />
+          <NavigationProperty Name="rezultat" Relationship="MilcomModel.fk_rezultat_polaznik1" FromRole="polaznik" ToRole="rezultat" />
+        </EntityType>
+        <EntityType Name="rezultat">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="datum_polaganja" Type="DateTime" Precision="0" />
+          <Property Name="pokusaj" Type="Int32" />
+          <Property Name="bodovi" Type="Int32" />
+          <Property Name="tip_polaganja_id" Type="Int32" Nullable="false" />
+          <Property Name="polaznik_oib" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="certifikat" Relationship="MilcomModel.fk_certifikat_rezultat1" FromRole="rezultat" ToRole="certifikat" />
+          <NavigationProperty Name="polaznik" Relationship="MilcomModel.fk_rezultat_polaznik1" FromRole="rezultat" ToRole="polaznik" />
+          <NavigationProperty Name="test" Relationship="MilcomModel.fk_rezultat_has_pitanje_rezultat" FromRole="rezultat" ToRole="test" />
+          <NavigationProperty Name="tip_polaganja" Relationship="MilcomModel.fk_rezultat_tip_polaganja1" FromRole="rezultat" ToRole="tip_polaganja" />
+        </EntityType>
+        <EntityType Name="test">
+          <Key>
+            <PropertyRef Name="rezultat_id" />
+            <PropertyRef Name="pitanje_id" />
+            <PropertyRef Name="odgovor_id" />
+          </Key>
+          <Property Name="rezultat_id" Type="Int32" Nullable="false" />
+          <Property Name="pitanje_id" Type="Int32" Nullable="false" />
+          <Property Name="odgovor_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="odgovor" Relationship="MilcomModel.fk_rezultat_has_pitanje_odgovor1" FromRole="test" ToRole="odgovor" />
+          <NavigationProperty Name="pitanje" Relationship="MilcomModel.fk_rezultat_has_pitanje_pitanje1" FromRole="test" ToRole="pitanje" />
+          <NavigationProperty Name="rezultat" Relationship="MilcomModel.fk_rezultat_has_pitanje_rezultat" FromRole="test" ToRole="rezultat" />
+        </EntityType>
+        <EntityType Name="tip_korisnik">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="tip" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="korisnik" Relationship="MilcomModel.fk_korisnik_tip_korisnik1" FromRole="tip_korisnik" ToRole="korisnik" />
+        </EntityType>
+        <EntityType Name="tip_polaganja">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="tip" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="pitanje" Relationship="MilcomModel.fk_pitanje_tip_polaganja1" FromRole="tip_polaganja" ToRole="pitanje" />
+          <NavigationProperty Name="rezultat" Relationship="MilcomModel.fk_rezultat_tip_polaganja1" FromRole="tip_polaganja" ToRole="rezultat" />
+        </EntityType>
+        <Association Name="fk_certifikat_rezultat1">
+          <End Role="rezultat" Type="MilcomModel.rezultat" Multiplicity="1" />
+          <End Role="certifikat" Type="MilcomModel.certifikat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rezultat">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="certifikat">
+              <PropertyRef Name="rezultat_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_korisnik_polaznik1">
+          <End Role="polaznik" Type="MilcomModel.polaznik" Multiplicity="0..1" />
+          <End Role="korisnik" Type="MilcomModel.korisnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="polaznik">
+              <PropertyRef Name="oib" />
+            </Principal>
+            <Dependent Role="korisnik">
+              <PropertyRef Name="polaznik_oib" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_korisnik_tip_korisnik1">
+          <End Role="tip_korisnik" Type="MilcomModel.tip_korisnik" Multiplicity="1" />
+          <End Role="korisnik" Type="MilcomModel.korisnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tip_korisnik">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="korisnik">
+              <PropertyRef Name="tip_korisnik_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_odgovor_pitanje1">
+          <End Role="pitanje" Type="MilcomModel.pitanje" Multiplicity="1" />
+          <End Role="odgovor" Type="MilcomModel.odgovor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pitanje">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="odgovor">
+              <PropertyRef Name="pitanje_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rezultat_has_pitanje_odgovor1">
+          <End Role="odgovor" Type="MilcomModel.odgovor" Multiplicity="1" />
+          <End Role="test" Type="MilcomModel.test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="odgovor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="test">
+              <PropertyRef Name="odgovor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_pitanje_tip_polaganja1">
+          <End Role="tip_polaganja" Type="MilcomModel.tip_polaganja" Multiplicity="1" />
+          <End Role="pitanje" Type="MilcomModel.pitanje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tip_polaganja">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pitanje">
+              <PropertyRef Name="tip_polaganja_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rezultat_has_pitanje_pitanje1">
+          <End Role="pitanje" Type="MilcomModel.pitanje" Multiplicity="1" />
+          <End Role="test" Type="MilcomModel.test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pitanje">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="test">
+              <PropertyRef Name="pitanje_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rezultat_polaznik1">
+          <End Role="polaznik" Type="MilcomModel.polaznik" Multiplicity="1" />
+          <End Role="rezultat" Type="MilcomModel.rezultat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="polaznik">
+              <PropertyRef Name="oib" />
+            </Principal>
+            <Dependent Role="rezultat">
+              <PropertyRef Name="polaznik_oib" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rezultat_has_pitanje_rezultat">
+          <End Role="rezultat" Type="MilcomModel.rezultat" Multiplicity="1" />
+          <End Role="test" Type="MilcomModel.test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rezultat">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="test">
+              <PropertyRef Name="rezultat_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rezultat_tip_polaganja1">
+          <End Role="tip_polaganja" Type="MilcomModel.tip_polaganja" Multiplicity="1" />
+          <End Role="rezultat" Type="MilcomModel.rezultat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tip_polaganja">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rezultat">
+              <PropertyRef Name="tip_polaganja_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MilcomModelStoreContainer" CdmEntityContainer="MilcomEntities">
+          <EntitySetMapping Name="certifikat">
+            <EntityTypeMapping TypeName="MilcomModel.certifikat">
+              <MappingFragment StoreEntitySet="certifikat">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="datum_izdavanja" ColumnName="datum_izdavanja" />
+                <ScalarProperty Name="rezultat_id" ColumnName="rezultat_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="korisnik">
+            <EntityTypeMapping TypeName="MilcomModel.korisnik">
+              <MappingFragment StoreEntitySet="korisnik">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="tip_korisnik_id" ColumnName="tip_korisnik_id" />
+                <ScalarProperty Name="polaznik_oib" ColumnName="polaznik_oib" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="odgovor">
+            <EntityTypeMapping TypeName="MilcomModel.odgovor">
+              <MappingFragment StoreEntitySet="odgovor">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tekst" ColumnName="tekst" />
+                <ScalarProperty Name="tocno" ColumnName="tocno" />
+                <ScalarProperty Name="pitanje_id" ColumnName="pitanje_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pitanje">
+            <EntityTypeMapping TypeName="MilcomModel.pitanje">
+              <MappingFragment StoreEntitySet="pitanje">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tekst" ColumnName="tekst" />
+                <ScalarProperty Name="tip_polaganja_id" ColumnName="tip_polaganja_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="polaznik">
+            <EntityTypeMapping TypeName="MilcomModel.polaznik">
+              <MappingFragment StoreEntitySet="polaznik">
+                <ScalarProperty Name="oib" ColumnName="oib" />
+                <ScalarProperty Name="ime" ColumnName="ime" />
+                <ScalarProperty Name="prezime" ColumnName="prezime" />
+                <ScalarProperty Name="datum_rodjenja" ColumnName="datum_rodjenja" />
+                <ScalarProperty Name="adresa" ColumnName="adresa" />
+                <ScalarProperty Name="telefon" ColumnName="telefon" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rezultat">
+            <EntityTypeMapping TypeName="MilcomModel.rezultat">
+              <MappingFragment StoreEntitySet="rezultat">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="datum_polaganja" ColumnName="datum_polaganja" />
+                <ScalarProperty Name="pokusaj" ColumnName="pokusaj" />
+                <ScalarProperty Name="bodovi" ColumnName="bodovi" />
+                <ScalarProperty Name="tip_polaganja_id" ColumnName="tip_polaganja_id" />
+                <ScalarProperty Name="polaznik_oib" ColumnName="polaznik_oib" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="test">
+            <EntityTypeMapping TypeName="MilcomModel.test">
+              <MappingFragment StoreEntitySet="test">
+                <ScalarProperty Name="rezultat_id" ColumnName="rezultat_id" />
+                <ScalarProperty Name="pitanje_id" ColumnName="pitanje_id" />
+                <ScalarProperty Name="odgovor_id" ColumnName="odgovor_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tip_korisnik">
+            <EntityTypeMapping TypeName="MilcomModel.tip_korisnik">
+              <MappingFragment StoreEntitySet="tip_korisnik">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tip" ColumnName="tip" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tip_polaganja">
+            <EntityTypeMapping TypeName="MilcomModel.tip_polaganja">
+              <MappingFragment StoreEntitySet="tip_polaganja">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tip" ColumnName="tip" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

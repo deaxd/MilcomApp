@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="acdc94f6183543f18aae00d5cfd93f84" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="MilcomModel.certifikat" Width="1.5" PointX="8.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MilcomModel.korisnik" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="MilcomModel.odgovor" Width="1.5" PointX="6" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="MilcomModel.pitanje" Width="1.5" PointX="3.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="MilcomModel.polaznik" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MilcomModel.rezultat" Width="1.5" PointX="6" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MilcomModel.test" Width="1.5" PointX="8.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="MilcomModel.tip_korisnik" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MilcomModel.tip_polaganja" Width="1.5" PointX="3.75" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="MilcomModel.fk_certifikat_rezultat1" ManuallyRouted="false" />
+        <AssociationConnector Association="MilcomModel.fk_korisnik_polaznik1" ManuallyRouted="false" />
+        <AssociationConnector Association="MilcomModel.fk_korisnik_tip_korisnik1" ManuallyRouted="false" />
+        <AssociationConnector Association="MilcomModel.fk_odgovor_pitanje1" ManuallyRouted="false" />
+        <AssociationConnector Association="MilcomModel.fk_rezultat_has_pitanje_odgovor1" ManuallyRouted="false" />
+        <AssociationConnector Association="MilcomModel.fk_pitanje_tip_polaganja1" ManuallyRouted="false" />
+        <AssociationConnector Association="MilcomModel.fk_rezultat_has_pitanje_pitanje1" ManuallyRouted="false" />
+        <AssociationConnector Association="MilcomModel.fk_rezultat_polaznik1" ManuallyRouted="false" />
+        <AssociationConnector Association="MilcomModel.fk_rezultat_has_pitanje_rezultat" ManuallyRouted="false" />
+        <AssociationConnector Association="MilcomModel.fk_rezultat_tip_polaganja1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
